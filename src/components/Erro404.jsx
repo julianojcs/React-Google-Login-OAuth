@@ -9,10 +9,8 @@ class Erro404 extends Component {
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <h1 className="App-title">Página enexistente</h1>
+                <p>Erro 404.</p>
             </header>
-            <p className="App-intro">
-                    Erro 404. Página inexistente
-            </p>
             </div>
         );
     }
