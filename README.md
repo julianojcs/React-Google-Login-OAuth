@@ -13,7 +13,7 @@ To run and test the OAuth2.0 u need to configure your Google Credentials ClientI
 https://console.developers.google.com/apis/credentials
 After this, goes to \g-login\src\shared\data.js file and set the clientId const to you personal Google Credentials ClientId.
 
-When runs the applicantion, check the console.
+When runs the applicantion, check the console (src/componets/LoginComponet.js.
 
 ### `npm test`
 
