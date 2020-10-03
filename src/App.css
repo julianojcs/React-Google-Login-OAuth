@@ -35,7 +35,7 @@
     color: var(--link-no-decoration);
     display: table-footer-group;
     width: 100%;
-    font-size: .7rem;
+    font-size: .8rem;
 }
 
 .cadastre-se {
@@ -79,6 +79,15 @@ ul.cadastre-se>li>a{
     z-index: 1;
     margin: 0;
     padding: 0
+}
+
+.btnGoogleLogin>span {
+    padding: 0 !important;
+    width: 100%;
+    margin-left: -10px !important;
+}
+.spnGoogleLogin {
+    font-size: 20px;
 }
 
 .password-on {

@@ -14,11 +14,11 @@ class GLogin extends Component{
                 // onFailure={this.error}
                 // onAutoLoadFinished={console.log("finished")}
                 // buttonText={`Google ${this.state.count}`}
-                buttonText={`Google`}
                 theme="dark"
-                className="btn-sm"
-                size="sm"
-            />
+                className="btnGoogleLogin w-50"
+            >
+                <span className="spnGoogleLogin">Google</span>
+            </GoogleLogin>
         )
     }
 };

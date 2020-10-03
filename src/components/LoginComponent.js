@@ -27,9 +27,9 @@ class Login extends Component {
     }
 
     failure(event) {
-        console.log(event);
+        console.log(event.error);
         if (event.error==='popup_closed_by_user') {
-            return (
+            document.body.append(
                 <div className="alert alert-danger" role="alert">
                     <strong>Holy guacamole!</strong> You should check in on some of those fields below.
                     <button type="button" className="close" data-dismiss="alert" aria-label="Close">
@@ -45,12 +45,13 @@ class Login extends Component {
         this.setState({
             familyName: response.profileObj.familyName,
             givenName: response.profileObj.givenName,
-            userToken: response.profileObj.userToken,
-            imageURL: response.profileObj.imageURL,
+            userToken: response.tokenId,
+            imageURL: response.profileObj.imageUrl,
             name: response.profileObj.name,
             email: response.profileObj.email,
             googleId: response.profileObj.googleId
         });
+        console.log(this.state);
     }
   
     render() {
