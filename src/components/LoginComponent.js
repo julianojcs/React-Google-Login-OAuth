@@ -3,10 +3,11 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Card, Button, Modal, ModalHeader, ModalBody, Label, Row, Col } from 'reactstrap';
 import '../App.css';
 import { Link } from 'react-router-dom';
-import { baseUrl, validEmail, clientId } from '../shared/data';
+import { baseUrl, validEmail } from '../shared/data';
 import logo from '../logo.svg';
 import InputPassword from './InputPasswordComponent';
 import GLogin from './GoogleLoginComponent';
+import config from '../config'; // ou const config = require('../config')
 
 class Login extends Component {
     constructor(props) {
@@ -106,7 +107,7 @@ class Login extends Component {
                             <hr className="line"/>
                         </div>
                         <GLogin 
-                            clientId={clientId} 
+                            clientId={config.clientId} 
                             onFailure={ event => this.failure(event) } 
                             onSuccess={ response => this.success(response) } 
                         />
