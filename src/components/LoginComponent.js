@@ -21,6 +21,14 @@ class Login extends Component {
             imageURL: null,
             name: null,
             email: null,
+            password: undefined,
+            signUp: {
+                success: undefined,
+                message: undefined
+            },
+            logged: false,
+            users: undefined,
+            error: undefined,
             googleId: null
         };
 
