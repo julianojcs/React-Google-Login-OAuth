@@ -11,7 +11,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 To run and test the OAuth2.0 u need to configure your Google Credentials ClientId at:
 https://console.developers.google.com/apis/credentials
-After this, goes to \g-login\src\shared\data.js file and set the clientId const to you personal Google Credentials ClientId.
+After this, goes to \g-login\src\shared\index.js file and set the clientId const to you personal Google Credentials ClientId.
 
 When runs the applicantion, check the console (src/componets/LoginComponet.js.
 

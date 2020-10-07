@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import { Control, Errors } from 'react-redux-form';
 import '../App.css';
-
-const minLength = (len) => (val) => (val) && (val.length >= len);
-const maxLength = (len) => (val) => !(val) || (val.length <= len);
+import { minLength, maxLength } from '../shared';
 
 class InputPassword extends Component {  
     constructor(props) {
@@ -27,21 +25,32 @@ class InputPassword extends Component {
         return (
             <>
                 <div className="input-group field-password-container">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text prepend">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-lock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"/>
-                                <path fillRule="evenodd" d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
-                            </svg>
-                        </span>
-                    </div>
+                    {   /**
+                         * To create a Component with the prepend icon, inform the props 'icon' without any value
+                         * To create a Component without the prepend icon, just omit the props 'icon'
+                         */
+                        this.props.icon !== undefined 
+                        ? (
+                            <div className="input-group-prepend">
+                                <span className="input-group-text prepend">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-lock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"/>
+                                        <path fillRule="evenodd" d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        ) 
+                        : ''
+                    }
+
                     <Control.text 
                         model={this.props.model}
                         type={ this.state.inputType }
                         name={this.props.name}
                         id={this.props.id}
-                        className={`field form-control ${ (this.props.className ? this.props.className : '') }`}
+                        className={`field form-control ${ (this.props.icon ? 'icon' : '') } ${ (this.props.className ? this.props.className : '') }`}
                         placeholder={this.props.placeholder}
+                        ref={this.props.ref}
                         autoComplete="off" 
                         validators={{
                             minLength: minLength(6), maxLength: maxLength(32)
