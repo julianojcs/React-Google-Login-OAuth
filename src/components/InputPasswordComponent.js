@@ -24,14 +24,14 @@ class InputPassword extends Component {
     render() {
         return (
             <>
-                <div className="input-group field-password-container">
+                <div className="input-group field-password-container align-items-center">
                     {   /**
                          * To create a Component with the prepend icon, inform the props 'icon' without any value
                          * To create a Component without the prepend icon, just omit the props 'icon'
                          */
                         this.props.icon !== undefined 
                         ? (
-                            <div className="input-group-prepend">
+                            <div className="input-group-prepend align-self-stretch">
                                 <span className="input-group-text prepend">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-lock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"/>
