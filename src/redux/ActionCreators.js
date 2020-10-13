@@ -1,5 +1,5 @@
 import * as ActionTypes from './ActionTypes';
-import { baseUrl } from '../shared/baseURL';
+import { baseUrl } from '../shared';
 
 export const postUser = (userId, firstname, lastname, mobile, email, imageURL, agree) => (dispatch) => {
     const newUser = {
