@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Control, LocalForm, Errors } from 'react-redux-form';
-import { Card, Button, Modal, ModalHeader, ModalBody, Label, Row, Col } from 'reactstrap';
+import { Card, Button, Label, Row, Col } from 'reactstrap';
+import { Toast } from 'react-bootstrap';
 import '../App.css';
 import { Link } from 'react-router-dom';
 import { baseUrl, validEmail } from '../shared';
@@ -31,7 +32,8 @@ class Login extends Component {
             users: undefined,
             error: undefined,
             googleId: null,
-            isModalOpen: false
+            isModalOpen: false,
+            isToastShown: false
         };
 
         this.failure = this.failure.bind(this)
@@ -55,6 +57,10 @@ class Login extends Component {
         this.setState({message: undefined})
     }
 
+    toggle = () => {
+        this.setState({isToastShown: !this.state.isToastShown});
+    }
+
     success = (response) => {
         console.log(`Nome: ${response.profileObj.name}`);
         this.setState({
@@ -72,9 +78,13 @@ class Login extends Component {
             },
             message: 'Usuário autenticado pelo Google Account!'
         });
+
+        this.toggle();
+
         console.log(this.state);
     }
 
+    delay = (t) => {window.setTimeout(()=>{this.setState({isToastShown:false})}, t)}
     handleLoginSubmit(values) {
         let dataToSend = {
             userData: values
@@ -108,19 +118,17 @@ class Login extends Component {
     render() {
         return (
             <>
-                {
-                    this.state.message !== undefined 
-                    ? (
-                        <div className="alert alert-danger" role="alert">
+                  <div className="container vh-100">
+                    <Toast onClose={() => this.toggle()} show={this.state.isToastShown} delay={3000} autohide>
+                        <Toast.Header className="mx-auto" toggle={{isToastShown: !this.state.isToastShown}}>
+                            <img src={this.state.imageURL} width={24} height={24} className="rounded-circle mr-2" alt="" />
+                            <strong className="mr-auto">{this.state.name}</strong>
+                            <small>logado</small>
+                        </Toast.Header>
+                        <Toast.Body>
                             {this.state.message}
-                            <button type="button" onClick={this.closeMsg} className="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    ) 
-                    : ''
-                }
-                <div className="container vh-100">
+                        </Toast.Body>
+                    </Toast>
                     <div className="col-xs-8 col-sm-8 col-md-10 col-lg-12 mx-auto d-flex vh-100">
                         <Card className="mx-auto my-auto card-login">
                             <div className="text-center">
@@ -173,6 +181,7 @@ class Login extends Component {
                                 clientId={config.clientId} 
                                 onFailure={ event => this.failure(event) } 
                                 onSuccess={ response => this.success(response) } 
+                                // onSuccess={ response => this.success(response, this.delay(2000)) } 
                             />
                         </Card>
                     </div>

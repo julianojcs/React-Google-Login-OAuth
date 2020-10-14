@@ -65,6 +65,18 @@
 
 /* End InputPasswordComponent Classes */
 
+/* Begin Taster */
+
+.toast {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 200;
+    margin: 15px;
+}
+
+/* End Taster */
+
 .flex-end {
     justify-content: flex-end;
 }

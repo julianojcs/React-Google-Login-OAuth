@@ -78,7 +78,9 @@ class SignUp extends Component {
                                             minLength: minLength(3)
                                         }} 
                                 />
-                                <Errors className="errors" model=".newName" show="touched"
+                                <Errors className="errors" 
+                                    model=".newName" 
+                                    show="touched" //Show the message only after the item is touched
                                     messages={{
                                         required: 'Campo obrigatório',
                                         minLength: 'Mínimo de 3 letras'
@@ -102,8 +104,40 @@ class SignUp extends Component {
                                 />
                             </Row>
                             <Row className="form-group">
-                                <Label htmlFor="newPassword">Password</Label>
-                                <InputPassword model=".newPassword" id="newPassword" name="newPassword" placeholder="Senha" />
+                                <Col md={6} className="p-0">
+                                    <Label htmlFor="newPassword">Informe uma senha</Label>
+                                    <InputPassword 
+                                        model=".newPassword" 
+                                        id="newPassword" 
+                                        name="newPassword" 
+                                        placeholder="Informe uma senha" 
+                                        validators={{
+                                            minLength: minLength(6), 
+                                            maxLength: maxLength(32)
+                                        }}
+                                        errorsMessages= {{
+                                            minLength: 'Mínimo de 6 caracteres',
+                                            maxLength: 'Máximo de 32 caracteres'
+                                        }}
+                                    />
+                                </Col>
+                                <Col md={6} className="p-0">
+                                    <Label htmlFor="newPassword2">Repita a senha</Label>
+                                    <InputPassword 
+                                        model=".newPassword2" 
+                                        id="newPassword2" 
+                                        name="newPassword2" 
+                                        placeholder="Repita a senha" 
+                                        validators={{
+                                            minLength: minLength(6), 
+                                            maxLength: maxLength(32)
+                                        }}
+                                        errorsMessages= {{
+                                            minLength: 'Mínimo de 6 caracteres',
+                                            maxLength: 'Máximo de 32 caracteres'
+                                        }}
+                                    />
+                                </Col>
                             </Row>
                             <Row className="form-group mb-0 ml-auto flex-end">
                                 <Button type="submit" color="primary" size="sm">Submit</Button>

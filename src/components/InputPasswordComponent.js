@@ -44,15 +44,15 @@ class InputPassword extends Component {
                     }
 
                     <Control.text 
-                        model={this.props.model}
-                        type={ this.state.inputType }
-                        name={this.props.name}
-                        id={this.props.id}
+                        model={this.props.model || ".password"}
+                        type={this.state.inputType}
+                        name={this.props.name || "password"}
+                        id={this.props.id || "password"}
                         className={`field form-control ${ (this.props.icon ? 'icon' : '') } ${ (this.props.className ? this.props.className : '') }`}
-                        placeholder={this.props.placeholder}
+                        placeholder={this.props.placeholder || "Informe sua senha"}
                         ref={this.props.ref}
-                        autoComplete="off" 
-                        validators={{
+                        autoComplete={this.props.autoComplete || "off"} 
+                        validators={this.props.validators || {
                             minLength: minLength(6), maxLength: maxLength(32)
                         }} 
                     />
@@ -63,8 +63,8 @@ class InputPassword extends Component {
                         onClick={ event => this.onClick(event) } >
                     </div>
                 </div>
-                <Errors className="errors" model=".password" show="touched"
-                    messages={{
+                <Errors className="errors" model={this.props.model} show="touched"
+                    messages={this.props.errorsMessages || {
                         minLength: 'Mínimo de 6 caracteres',
                         maxLength: 'Máximo de 32 caracteres'
                     }}
