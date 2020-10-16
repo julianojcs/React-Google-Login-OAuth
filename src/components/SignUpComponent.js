@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Label, Row, Col } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form'
-import { required, minLength, maxLength, validEmail } from '../shared';
+import { required, minLength, maxLength, validEmail, passwordsMatch } from '../shared';
 import InputPassword from '../components/InputPasswordComponent';
 
 class SignUp extends Component {
@@ -68,7 +68,10 @@ class SignUp extends Component {
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Formulário de registro</ModalHeader>
                     <ModalBody>
-                        <LocalForm onSubmit={(values) => this.handleSubmit(values)} className="mx-3 mb-neg-rem-1">
+                        <LocalForm 
+                            onSubmit={(values) => this.handleSubmit(values)} 
+                            className="mx-3 mb-neg-rem-1"
+                        >
                             <Row className="form-group">
                                 <Label htmlFor="newName">Nome completo</Label>
                                 <Control.text model=".newName" className="form-control" id="newName" name="newName" 
@@ -130,11 +133,13 @@ class SignUp extends Component {
                                         placeholder="Repita a senha" 
                                         validators={{
                                             minLength: minLength(6), 
-                                            maxLength: maxLength(32)
+                                            maxLength: maxLength(32),
+                                            passwordsMatch: passwordsMatch('.newPassword', '.newPassword2')
                                         }}
                                         errorsMessages= {{
                                             minLength: 'Mínimo de 6 caracteres',
-                                            maxLength: 'Máximo de 32 caracteres'
+                                            maxLength: 'Máximo de 32 caracteres',
+                                            passwordsMatch: 'Emails tem que ser iguais'
                                         }}
                                     />
                                 </Col>
