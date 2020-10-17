@@ -5,7 +5,8 @@ import { Toast } from 'react-bootstrap';
 import '../App.css';
 import { Link } from 'react-router-dom';
 import { baseUrl, validEmail } from '../shared';
-import logo from '../logo.svg';
+// import logo from '../logo.svg';
+import {ReactComponent as Logo} from '../logo.svg';
 import InputPassword from '../components/InputPasswordComponent';
 import GLogin from '../components/GoogleLoginComponent';
 import SignUp from '../components/SignUpComponent';
@@ -132,7 +133,8 @@ class Login extends Component {
                     <div className="col-xs-8 col-sm-8 col-md-10 col-lg-12 mx-auto d-flex vh-100">
                         <Card className="mx-auto my-auto card-login">
                             <div className="text-center">
-                                <img src={logo} className="logo-login img-fluid rounded" alt="" />
+                                <Logo className="logo-login img-fluid rounded" />
+                                {/* <img src={logo} className="logo-login img-fluid rounded" alt="" /> */}
                             </div>
                             <LocalForm onSubmit={(values) => this.handleLoginSubmit(values)}>
                                 <Row className="form-group">
