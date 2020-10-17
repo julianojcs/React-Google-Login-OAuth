@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Control, Errors } from 'react-redux-form';
+import { Control } from 'react-redux-form';
 import '../App.css';
 import { minLength, maxLength } from '../shared';
 
@@ -13,12 +13,19 @@ class InputPassword extends Component {
         };
 
         this.onClick = this.onClick.bind(this)
+        this.onChange = this.onChange.bind(this)
     }
 
     onClick(event) {
         var type = this.state.inputType;
         this.setState({ inputType: type === 'password' ? 'text' : 'password' });
         this.setState({ show: type === 'password' ? 'password-on' : 'password-off' });
+    }
+
+    onChange(event) {
+        if (this.props.onChange && event != null) {
+            this.props.onChange(event.value);
+        }        
     }
 
     render() {
@@ -52,6 +59,7 @@ class InputPassword extends Component {
                         placeholder={this.props.placeholder || "Informe sua senha"}
                         ref={this.props.ref}
                         autoComplete={this.props.autoComplete || "off"} 
+                        onChange={(event) => this.onChange(event)}
                         validators={this.props.validators || {
                             minLength: minLength(6), maxLength: maxLength(32)
                         }} 
@@ -63,12 +71,7 @@ class InputPassword extends Component {
                         onClick={ event => this.onClick(event) } >
                     </div>
                 </div>
-                <Errors className="errors" model={this.props.model} show="touched"
-                    messages={this.props.errorsMessages || {
-                        minLength: 'Mínimo de 6 caracteres',
-                        maxLength: 'Máximo de 32 caracteres'
-                    }}
-                />
+ 
             </>
         );
     }
