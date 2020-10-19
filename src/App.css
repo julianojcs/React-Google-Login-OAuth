@@ -156,13 +156,16 @@ ul.cadastre-se>li>a{
 }
 
 .errors {
-    display: grid;
+    /* display: grid;
     width: 100%;
-    margin-top: .25rem;
-    font-size: 80%;
+    margin-top: .25rem; */
+    font-size: .8rem;
     color: #dc3545;
 }
 
+label {
+    margin-bottom: 0;
+}
 .card-login {
     border-radius: 5px;
     box-shadow: 1px 2px 5px grey;

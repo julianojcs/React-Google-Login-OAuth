@@ -10,7 +10,7 @@ export const ConfigureStore = () => {
         combineReducers({
             users: Users,
             ...createForms ({
-                feedback: Cadastro
+                cadastro: Cadastro
             })
         }), 
         applyMiddleware(thunk, logger)

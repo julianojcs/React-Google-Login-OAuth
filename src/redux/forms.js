@@ -1,8 +1,7 @@
 export const Cadastro= {
-    firstname: '',
-    lastname: '',
-    mobile: '',
-    email: '',
-    imageURL: '',
+    newName: '',
+    newEmail: '',
+    newPassword: '',
+    newPassword2: '',
     agree: false
 }
