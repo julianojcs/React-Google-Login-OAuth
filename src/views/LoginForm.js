@@ -17,7 +17,6 @@ class Login extends Component {
         super(props);
         
         this.state = {
-            value: null,
             familyName: null,
             givenName: null,
             userToken: null,
@@ -30,9 +29,9 @@ class Login extends Component {
                 message: undefined
             },
             logged: false,
-            users: undefined,
             error: undefined,
             googleId: null,
+            value: null,
             isModalOpen: false,
             isToastShown: false
         };
@@ -103,11 +102,15 @@ class Login extends Component {
         .then(response => response.json())
         .then(responseJson => {
             if (responseJson.success) {
-                localStorage.setItem('DD101_TOKEN', responseJson.token);
+                localStorage.setItem('JCS_TOKEN', responseJson.token);
                 this.setState({
                     email: values.email,
                     logged: true,
-                    error: undefined
+                    error: undefined,
+                    signUp: {
+                        success: 200,
+                        message: 'Usuário autenticado com sucesso!'
+                    },
                 })
                 console.log(responseJson);
                 console.log(this.state);
