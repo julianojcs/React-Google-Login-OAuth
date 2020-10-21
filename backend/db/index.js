@@ -22,4 +22,11 @@ module.exports = {
         })
     },
 
+    signIn: (data, handler) => {
+        db.collection('users').findOne({email: data.email, password: data.password}, (err, result) => {
+            handler(err, result);
+        })
+        // handler(null, data)
+    },
+
 }
