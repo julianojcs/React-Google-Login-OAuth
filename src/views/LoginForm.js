@@ -4,7 +4,7 @@ import { Card, Button, Label, Row, Col } from 'reactstrap';
 import { Toast } from 'react-bootstrap';
 import '../App.css';
 import { Link } from 'react-router-dom';
-import { baseUrl, validEmail } from '../shared';
+import { baseUrl, minLength, maxLength, validEmail } from '../shared';
 // import logo from '../logo.svg';
 import {ReactComponent as Logo} from '../logo.svg';
 import InputPassword from '../components/InputPasswordComponent';
@@ -39,6 +39,8 @@ class Login extends Component {
         this.failure = this.failure.bind(this)
         this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     }
+
+    static displayName = 'LoginForm'
 
     failure(event) {
         console.log(event.error);
@@ -85,11 +87,12 @@ class Login extends Component {
     }
 
     delay = (t) => {window.setTimeout(()=>{this.setState({isToastShown:false})}, t)}
+
     handleLoginSubmit(values) {
         let dataToSend = {
             userData: values
         };
-        console.log(dataToSend)
+        // console.log(dataToSend)
         let url = 'http://localhost:3001/auth/login';
 
         fetch(url, {
@@ -112,8 +115,8 @@ class Login extends Component {
                         message: 'Usuário autenticado com sucesso!'
                     },
                 })
-                console.log(responseJson);
-                console.log(this.state);
+                // console.log(responseJson);
+                // console.log(this.state);
                 //this.loadUsers()
             }
         }).catch(err => this.setState({ error: err }));
@@ -157,18 +160,40 @@ class Login extends Component {
                                                     validEmail
                                                 }} 
                                             />
-                                            <Errors className="errors" model=".email" show="touched"
-                                                messages={{
-                                                    validEmail: 'Informar um e-mail válido'
-                                                }}
-                                            />
                                         </div>
+                                        <Errors className="errors" 
+                                            model=".email" 
+                                            show={(field) => field.touched && !field.focus}
+                                            component={(props) => <div className="errors">{props.children}</div>}
+                                            messages={{
+                                                validEmail: 'Informar um e-mail válido'
+                                            }}
+                                        />
                                     </Col>
                                 </Row>
                                 <Row className="form-group">
                                     <Label htmlFor="password" className="py-0" md={3}>Senha:</Label>
                                     <Col md={9}>
-                                        <InputPassword model=".password" id="password" name="password" icon placeholder="Senha" />
+                                        <InputPassword 
+                                            model=".password" 
+                                            id="password" 
+                                            name="password" 
+                                            icon 
+                                            placeholder="Informe uma senha" 
+                                            validators={{
+                                                minLength: minLength(6), 
+                                                maxLength: maxLength(32)
+                                            }}
+                                        />
+                                        <Errors className="errors"
+                                            model=".password" 
+                                            show={(field) => field.touched && !field.focus}
+                                            component={(props) => <div className="errors">{props.children}</div>}
+                                            messages={{
+                                                minLength: 'Mínimo de 6 caracteres',
+                                                maxLength: 'Máximo de 32 caracteres'
+                                            }}
+                                        />
                                         <Link to="/" className="link-login">Esqueceu sua senha?</Link>
                                     </Col>
                                 </Row>

@@ -163,7 +163,7 @@ class SignUp extends Component {
                                 <Col md={6} className="p-0">
                                     <Label htmlFor="newPassword">Informe uma senha</Label>
                                     <InputPassword 
-                                    onChange={() => this.handlePasswordChange()}
+                                        onChange={() => this.handlePasswordChange()}
                                         model=".newPassword" 
                                         id="newPassword" 
                                         name="newPassword" 
