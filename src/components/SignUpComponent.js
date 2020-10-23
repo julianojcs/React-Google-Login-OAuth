@@ -48,6 +48,7 @@ class SignUp extends Component {
                 console.log(responseJson)
                 if (responseJson.success) {
                     this.setState({
+                        ...this.state,
                         signUp: {
                             success: true,
                             message: responseJson.message
@@ -55,6 +56,7 @@ class SignUp extends Component {
                     });
                 } else {
                     this.setState({
+                        ...this.state,
                         signUp: {
                             success: false,
                             message: responseJson.message
@@ -65,30 +67,6 @@ class SignUp extends Component {
         
         this.toggleModal();
     }
-
-    // onUpdate={(formValue) => ...} (Function): a handler that is called whenever the form value is updated
-    // handleUpdate(formValue) {
-        // const pw1 =  formValue.newPassword.value;
-        // const pw2 =  formValue.newPassword2.value;
-        // const pw1 =  document.getElementById('newPassword').value;
-        // const pw2 =  document.getElementById('newPassword2').value;
-        // const valido = pw1===pw2;
-        // this.setState({
-        //     passwordsMatch: valido
-        // }) 
-        // console.log('Estado: '+this.state.passwordsMatch);
-        // console.log(formValue)
-        // this.setState({
-        //     passwordsMatch: formValue.newPassword.value===formValue.newPassword2.value
-        // }) 
-    // }
-
-    // onChange={(modelValue) => ...} (Function): a handler that is called whenever the form's model value is changed
-    // handleChange(modelValue) {
-        // const valido = modelValue.newPassword===modelValue.newPassword2;
-        // console.log(modelValue);
-        // this.formDispatch(actions.change('cadastro.newEmail', 'bar'));
-    // }
 
     handlePasswordChange() {
         const pw1 =  document.getElementById('newPassword').value;
