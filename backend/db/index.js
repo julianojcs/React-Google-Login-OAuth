@@ -23,10 +23,22 @@ module.exports = {
     },
 
     signIn: (data, handler) => {
-        db.collection('users').findOne({email: data.email, password: data.password}, (err, result) => {
+        db.collection('users').findOne(data, (err, result) => {
             handler(err, result);
         })
         // handler(null, data)
     },
 
+    login: (data, handler) => {
+        db.collection('users').findOne(data, (err, result) => {
+            handler(err, result);
+        })
+        // handler(null, data)
+    },
+
+    findAll: (handler) => {
+        db.collection('users').find((err, result) => {
+            handler(err, result);
+        })
+    }
 }
