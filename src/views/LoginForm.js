@@ -26,7 +26,8 @@ class Login extends Component {
             password: undefined,
             signUp: {
                 success: undefined,
-                message: undefined
+                message: undefined,
+                code: undefined
             },
             logged: false,
             error: undefined,
@@ -76,7 +77,8 @@ class Login extends Component {
             logged: true,
             signUp: {
                 success: 200,
-                message: 'Usuário autenticado pelo Google Account!'
+                message: 'Usuário autenticado pelo Google Account!',
+                code: undefined
             },
             message: 'Usuário autenticado pelo Google Account!'
         });
@@ -92,48 +94,76 @@ class Login extends Component {
         let dataToSend = {
             userData: values
         };
-        // console.log(dataToSend)
-        let url = 'http://localhost:3001/auth/login';
+        let url = 'http://localhost:3001/auth/signin';
 
         fetch(url, {
             method: "POST",
             body: JSON.stringify(dataToSend),
             headers: {
                 "Content-Type": "application/json"
-            }
+            },
+            credentials: 'same-origin'
         })
         .then(response => response.json())
         .then(responseJson => {
             if (responseJson.success) {
+                // console.log('Usuário logado: ');
                 localStorage.setItem('JCS_TOKEN', responseJson.token);
                 this.setState({
-                    email: values.email,
+                    ...this.state,
+                    email: responseJson.email,
+                    name: responseJson.name,
                     logged: true,
                     error: undefined,
+                    message: 'Usuário autenticado com sucesso!',
                     signUp: {
                         success: 200,
-                        message: 'Usuário autenticado com sucesso!'
+                        message: 'Usuário autenticado com sucesso!',
+                        code: undefined
                     },
                 })
                 // console.log(responseJson);
-                // console.log(this.state);
+                console.log(this.state);
+                
                 //this.loadUsers()
+            }else{
+                // console.log('Deu ruim');
+                // console.log(responseJson);
+                this.setState({
+                    ...this.state,
+                    email: undefined,
+                    name: undefined,
+                    logged: false,
+                    message: responseJson.message,
+                    signUp: {
+                        success: responseJson.success,
+                        message: responseJson.message,
+                        code: responseJson.code
+                    },
+                })
             }
-        }).catch(err => this.setState({ error: err }));
+            this.toggle();
+        }).catch(err => {this.setState({ error: err })});
     }
 
     render() {
         return (
             <>
                   <div className="container vh-100">
-                    <Toast onClose={() => this.toggle()} show={this.state.isToastShown} delay={3000} autohide>
+                    <Toast onClose={() => this.toggle()} show={this.state.isToastShown} delay={5000} autohide>
                         <Toast.Header className="mx-auto" toggle={{isToastShown: !this.state.isToastShown}}>
-                            <img src={this.state.imageURL} width={24} height={24} className="rounded-circle mr-2" alt="" />
-                            <strong className="mr-auto">{this.state.name}</strong>
-                            <small>logado</small>
+                            {this.state.imageURL ?
+                                <img src={this.state.imageURL} width={24} height={24} className="rounded-circle mr-2" alt="" />
+                                : ''
+                            }
+                            <strong className="mr-auto">{ this.state.signUp.message }</strong>
+                            <small>{this.state.success ? 'Logado' : ''}</small>
                         </Toast.Header>
                         <Toast.Body>
-                            {this.state.message}
+                            {this.state.name ?
+                                this.state.name
+                                : 'Erro: ' + this.state.signUp.code
+                            }
                         </Toast.Body>
                     </Toast>
                     <div className="col-xs-8 col-sm-8 col-md-10 col-lg-12 mx-auto d-flex vh-100">

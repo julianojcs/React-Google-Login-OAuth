@@ -22,14 +22,7 @@ module.exports = {
         })
     },
 
-    signIn: (data, handler) => {
-        db.collection('users').findOne(data, (err, result) => {
-            handler(err, result);
-        })
-        // handler(null, data)
-    },
-
-    login: (data, handler) => {
+    findUser: (data, handler) => {
         db.collection('users').findOne(data, (err, result) => {
             handler(err, result);
         })
